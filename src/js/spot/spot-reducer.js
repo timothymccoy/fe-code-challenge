@@ -1,4 +1,4 @@
-import {SPOT_UPDATE_SELECTED} from './spot-actions';
+import {SPOT_UPDATE_SELECTED, SPOT_RESET_SELECTED} from './spot-actions';
 
 const initialState = {
     selected: null
@@ -11,6 +11,13 @@ export default function spot(state = initialState, {type, payload}) {
                 ...state,
                 selected: payload || null
             };
+        }
+
+        case SPOT_RESET_SELECTED:{
+            return {
+                ...state,
+                selected:payload || null
+            }
         }
 
         default:

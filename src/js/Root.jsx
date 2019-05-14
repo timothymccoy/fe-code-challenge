@@ -4,6 +4,7 @@ import {ConnectedRouter} from 'connected-react-router';
 import axios from 'axios';
 import createStore, {getHistory} from 'store/store';
 import App from './App';
+import Spinner from 'common/Spinner';
 
 export default class Root extends Component {
     state = {
@@ -38,9 +39,7 @@ export default class Root extends Component {
 
         if (isLoading) {
             return (
-                <div className="Root-loader">
-                    Loading...
-                </div>
+                <Spinner>Loading...</Spinner>
             );
         }
 

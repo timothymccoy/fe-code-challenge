@@ -1,15 +1,19 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {reset} from 'redux-form';
 import {push} from 'connected-react-router';
+import {resetSelected} from 'spot/spot-actions';
 import Button from 'common/Button';
 import Image from 'common/Image';
 
 class Confirmation extends PureComponent {
     static propTypes = {
-        email: PropTypes.string.isRequired,
+        form: PropTypes.object.isRequired,
         selectedSpot: PropTypes.object,
-        pushTo: PropTypes.func.isRequired
+        pushTo: PropTypes.func.isRequired,
+        resetSelected: PropTypes.func.isRequired,
+        resetForm: PropTypes.func.isRequired
     };
 
     constructor(props) {
@@ -29,14 +33,20 @@ class Confirmation extends PureComponent {
     _onPurchaseAnotherClick = evt => {
         const {
             pushTo,
+            resetSelected,
+            resetForm
         } = this.props;
-
+        //clear selected spot
+        resetSelected();
+        //reset checkout form
+        resetForm("checkout");
+        //redirect to search
         pushTo('/');
     }
 
     render() {
         const {
-            email,
+            form,
             selectedSpot
         } = this.props;
 
@@ -49,7 +59,7 @@ class Confirmation extends PureComponent {
                 <h1>Park it like its hot!</h1>
                 <p>You successfully purchased parking at <strong>{selectedSpot.title}</strong> for <strong>${(selectedSpot.price / 100).toFixed(2)}</strong>.</p>
                 <Image src={selectedSpot.image} />
-                <p>We emailed a receipt to <a href={`mailto:${email}`}>{email}</a>.</p>
+                <p>We emailed a receipt to <a href={`mailto:${form.checkout.values.email}`}>{form.checkout.values.email}</a>.</p>
                 <Button
                     color="primary"
                     onClick={this._onPurchaseAnotherClick}
@@ -63,22 +73,22 @@ class Confirmation extends PureComponent {
 
 const mapStateToProps = state => {
     const {
-        checkout: {
-            email
-        },
+        form,
         spot: {
             selected: selectedSpot
         }
     } = state;
 
     return {
-        email,
+        form,
         selectedSpot
     };
 };
 
 const mapDispatchToProps = {
     pushTo: push,
+    resetSelected,
+    resetForm:reset
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Confirmation);

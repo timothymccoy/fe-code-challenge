@@ -1,3 +1,57 @@
-.Checkout {
-    //
+.checkoutFormContainer {
+    margin: 0 auto;
+    width: 435px;
+    background-color:#FFF;
+    border-radius:10px;
+    overflow: hidden;
+    margin-top:30px;
+    border: 1px solid #e6e4e4;
+    padding-bottom:30px;
+}
+.checkoutFormContainer>div{
+    width:100%;
+}
+.containerHeader{
+    padding:15px;
+    background-color:#0282ff;
+}
+.containerHeader a{
+    color:#FFF;
+}
+
+.checkoutFormContainer .ui.form{
+    width:380px;
+    margin-top:20px;
+}
+
+.checkoutFormContainer .ui.form .field{
+    margin-bottom:15px;
+}
+
+.checkoutFormContainer .formWrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.checkoutFormContainer .ui.form input:not([type]), .checkoutFormContainer .ui.form input[type]{
+    padding:12px;
+    font-size:14px;
+}
+
+.checkoutFormContainer .ui.form input:not([type]):focus, .checkoutFormContainer .ui.form input[type]:focus{
+    border-color:#028202;
+}
+
+.checkoutFormContainer .ui.form input.error:not([type]), .checkoutFormContainer .ui.form input.error[type]{
+    border-color:#ff0000;
+}
+
+.checkoutFormContainer .SpotItem{
+    padding:0 0 20px 0;
+}
+
+.checkoutFormContainer .ui.form .field > label{
+    font-weight:600;
+    font-size: 14px;
+    color:#52789c;
 }
